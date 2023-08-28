@@ -11,8 +11,8 @@ namespace HelloDungeon
         public void Run()
         {
             //The stats of the character.
-            string playerName = "Player";
-            string playerChoice;
+            string playerName = "";
+            string playerChoice = "";
             int areaNumber = 0;
             bool playerIsAlive = true;
             float maxPlayerHealth = 100.00f;
@@ -22,6 +22,11 @@ namespace HelloDungeon
             //Print out name for first exercise.
             Console.WriteLine("Kenneth");
             Console.WriteLine("Jackson");
+
+            //First and last name.
+            string firstname = Console.ReadLine();
+            string lastname = Console.ReadLine();
+            playerName = firstname + lastname;
 
             playerName = Console.ReadLine();
 
@@ -48,22 +53,37 @@ namespace HelloDungeon
 
             Console.Clear();
 
-            Console.WriteLine("What is your name?");
+            //First Loop, "Redeciding on a name".
+            while (playerChoice != "1")
+            {
+                Console.WriteLine("What is your name?");
 
-            //First and last name.
-            string firstname = Console.ReadLine();
-            string lastname = Console.ReadLine();
-            playerName = firstname + lastname;
+                Console.Write("> ");
 
-            //Inroduction to the game.
-            Console.WriteLine("I see. It's nice to meet you," + playerName + "." );
+                playerName = Console.ReadLine();
 
-            Console.Write("> ");
+                Console.WriteLine("Ah," + playerName + "! Am I hearing that clearly?");
 
-            Console.WriteLine("Press any key to continue.");
-            Console.ReadKey(true);
+                Console.WriteLine("1. Yes");
+                Console.WriteLine("2. No");
 
-            Console.Clear();
+                Console.Write("> ");
+                playerChoice = Console.ReadLine();
+
+                Console.Clear();
+                if (playerChoice == "1")
+                {
+                    Console.WriteLine("I see. It's nice to meet you," + playerName + ".");
+                }
+                else if (playerChoice == "2")
+                {
+                    Console.WriteLine("Sorry about that.");
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Input");
+                }
+            }
 
             Console.WriteLine("Again, welcome to Marif!");
 
@@ -121,7 +141,7 @@ namespace HelloDungeon
 
             areaNumber = 1;
 
-            //The Beginning.
+            //The Beginning of the Adventure.
             Console.WriteLine("You find yourself waking up on an open field of grass.");
 
             Console.Write("> ");
@@ -140,7 +160,7 @@ namespace HelloDungeon
 
             Console.Clear();
 
-            Console.WriteLine("There seems to be a village nearby. Do you want to go to the village?");
+            Console.WriteLine("There seems to be a village nearby.");
 
             Console.Write("> ");
 
@@ -149,14 +169,50 @@ namespace HelloDungeon
 
             Console.Clear();
 
-            //First Choice.
-            Console.WriteLine("1. Yes");
-            Console.WriteLine("2. No");
-            
-            if (playerChoice == "1")
+            //A loop inside of a loop to let you redecide on your decision.
+            bool decisionMade = false;
+
+            while (decisionMade == false)
             {
-                Console.WriteLine("You walk towards the village");
-            } 
+                Console.WriteLine("Do you want to go to the village?");
+
+                Console.WriteLine("1. Yes");
+                Console.WriteLine("2. No");
+
+                Console.Write("> ");
+                playerChoice = Console.ReadLine();
+
+                Console.Clear();
+
+                if (playerChoice == "1")
+                {
+                    Console.WriteLine("You walk towards the village.");
+
+                }
+                else if (playerChoice == "2")
+                {
+
+                }
+
+                playerChoice = "";
+
+                while (playerChoice != "1" && playerChoice != "2")
+                {
+                    Console.WriteLine("Are you sure?");
+                    Console.WriteLine("1. Yes");
+                    Console.WriteLine("2. No");
+
+                    Console.WriteLine("> ");
+                    playerChoice = Console.ReadLine();
+
+                    if (playerChoice == "1")
+                    {
+                        decisionMade = true;
+                    }
+                }
+            }
+
+            Console.WriteLine("");
         }
     }
 }
