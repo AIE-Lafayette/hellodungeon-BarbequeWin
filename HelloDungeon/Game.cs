@@ -70,6 +70,11 @@ namespace HelloDungeon
             return playerChoice;
         }
 
+
+        float StartBattle(float maxPlayerHealth, float maxEnemyHealth)
+        {
+
+        }
         public void Run()
         {
             //The stats of the character.
@@ -79,9 +84,16 @@ namespace HelloDungeon
             bool playerIsAlive = true;
             bool gameOver = false;
             float maxPlayerHealth = 100.00f;
-            float maxPlayerStamina = 100.00f;
-            float maxPlayerMagic = 100.00f;
-            float playerMoney = 2000.00f;
+            float maxPlayerDamage = 50.00f;
+            float maxIronSwordDamage = 50.00f;
+            float maxIronAxeDamage = 50.00f;
+            float maxIronSpearDamage = 50.00f;
+            float maxGrasslandDemonHealth = 50.00f;
+            float maxGrasslandDemonDamage = 5.00f;
+            float maxRoyalGuardDemonHealth = 100.00f;
+            float maxRoyalGuardDemonDamage = 12.50f;
+            float maxDemonKingHealth = 200.00f;
+            float maxDemonKingDamage = 20.00f;
 
             //Print out name for first exercise.
             Console.WriteLine("Kenneth");
@@ -176,7 +188,7 @@ namespace HelloDungeon
 
             Console.Clear();
 
-            Console.WriteLine("You are probably wondering, 'How did I get here?' or 'Why do I have to risk my life to fight the Demon King?'");
+            Console.WriteLine("You are probably wondering, 'Why do I have to risk my life to fight the Demon King?'");
 
             Console.Write("> ");
 
@@ -185,7 +197,7 @@ namespace HelloDungeon
 
             Console.Clear();
 
-            Console.WriteLine("On your journey, you will learn all and know all. You will also meet other faces along the way.");
+            Console.WriteLine("On your journey, you will learn all and know all.");
 
             Console.Write("> ");
 
@@ -224,6 +236,15 @@ namespace HelloDungeon
 
             Console.Clear();
 
+            Console.WriteLine("In the deistance, there is the Demon King's castle.");
+
+            Console.Write("> ");
+
+            Console.WriteLine("Press any key to continue.");
+            Console.ReadKey(true);
+
+            Console.Clear();
+
             Console.WriteLine("There seems to be a village nearby.");
 
             Console.Write("> ");
@@ -251,7 +272,7 @@ namespace HelloDungeon
 
             Console.Clear();
 
-            Console.WriteLine("The person offers you a potion of unknown origin that costs 500 credits.");
+            Console.WriteLine("The person offers you a potion of unknown origin.");
 
             Console.Write("> ");
 
@@ -265,7 +286,7 @@ namespace HelloDungeon
 
             while (playerChoice != "1")
             {
-                Console.WriteLine("You have 2,000 credits. Do you want to buy the potion?");
+                Console.WriteLine("Do you want the potion?");
 
                 Console.WriteLine("1. Yes");
                 Console.WriteLine("2. No");
@@ -276,7 +297,9 @@ namespace HelloDungeon
                 Console.Clear();
                 if (playerChoice == "1")
                 {
-                    Console.WriteLine("You obtained a health potion.");
+                    Console.WriteLine("You drank the potion, which mad you increase max health.");
+
+                    maxPlayerHealth *= 2;
                 }
                 else if (playerChoice == "2")
                 {
@@ -297,25 +320,207 @@ namespace HelloDungeon
 
             Console.Clear();
 
-            void displayStats(string name, float health, float stamina, float magic, float money)
+            void displayStats(string name, float health, float damage)
             {
                 Console.WriteLine("Name" + name);
                 Console.WriteLine("Health" + health);
-                Console.WriteLine("Stamina" + stamina);
-                Console.WriteLine("Magic" + magic);
-                Console.WriteLine("Money" + money);
+                Console.WriteLine("Damage" + damage);
             }
 
-            Console.WriteLine("");
+            Console.WriteLine("It's time to go to the armory.");
+
+            Console.Write("> ");
+
+            Console.WriteLine("Press any key to continue.");
+            Console.ReadKey(true);
+
+            Console.Clear();
+
+            //Choose your weapon.
+            playerChoice = DisplayMenu("Choose your weapon", "Iron Sword", "Iron Axe", "Iron Spear");
+
+            if (playerChoice == "1")
+            {
+                maxPlayerDamage = maxIronSwordDamage;
+            }
+            else if (playerChoice == "2")
+            {
+                maxPlayerDamage = maxIronAxeDamage;
+            }
+            else if (playerChoice == "3")
+            {
+                maxPlayerDamage = maxIronSpearDamage;
+            }
+
+            Console.Write("> ");
+
+            Console.WriteLine("Press any key to continue.");
+            Console.ReadKey(true);
+
+            Console.Clear();
+
+            //Onward! To the Demon King Castle!
+            Console.WriteLine("Now that you are prepared, it's time to fight the Demon King and his underlings!");
+
+            Console.Write("> ");
+
+            Console.WriteLine("Press any key to continue.");
+            Console.ReadKey(true);
+
+            Console.Clear();
+
+            Console.WriteLine("You walked back out to the grasslands as you began the fight with an underling.");
+
+            Console.Write("> ");
+
+            Console.WriteLine("Press any key to continue.");
+            Console.ReadKey(true);
+
+            Console.Clear();
+
+            while (maxPlayerHealth > 0 && maxGrasslandDemonHealth > 0)
+            {
+                Console.WriteLine("Player's Turn");
+                Console.WriteLine("Player Health " + maxPlayerHealth + ". Enemy Health " + maxGrasslandDemonHealth + " .");
+                Console.WriteLine("1. Attack");
+
+                playerChoice = Console.ReadLine();
+
+                if (playerChoice == "1")
+                {
+                    maxGrasslandDemonHealth -= maxPlayerDamage;
+                    Console.WriteLine("You dealt " + maxPlayerDamage + " damage!");
+                }
+
+                if (maxGrasslandDemonHealth > 0)
+                {
+                    Console.WriteLine("Enemy's Turn");
+                    Console.WriteLine("Player Health " + maxPlayerHealth + ". Enemy Health " + maxGrasslandDemonHealth + " .");
+
+                    maxPlayerHealth -= maxGrasslandDemonDamage;
+                    Console.WriteLine("Enemy dealt " + maxGrasslandDemonDamage + " damage");
+
+                    Console.Write("> ");
+
+                    Console.WriteLine("Press any key to continue.");
+                    Console.ReadKey(true);
+
+                    Console.Clear();
+                }
+            }
+
+            Console.WriteLine("You Win!");
+
+            Console.Write("> ");
+
+            Console.WriteLine("Press any key to continue.");
+            Console.ReadKey(true);
+
+            Console.Clear();
+
+            //The Demon King's castle. Fighting the royal guard.
+            Console.WriteLine("You now enter the Demon King's castle, meeting his royal guard.");
+
+            Console.Write("> ");
+
+            Console.WriteLine("Press any key to continue.");
+            Console.ReadKey(true);
+
+            Console.Clear();
+
+            while (maxPlayerHealth > 0 && maxRoyalGuardDemonHealth > 0)
+            {
+                Console.WriteLine("Player's Turn");
+                Console.WriteLine("Player Health " + maxPlayerHealth + ". Enemy Health " + maxRoyalGuardDemonHealth + " .");
+                Console.WriteLine("1. Attack");
+
+                playerChoice = Console.ReadLine();
+
+                if (playerChoice == "1")
+                {
+                    maxRoyalGuardDemonHealth -= maxPlayerDamage;
+                    Console.WriteLine("You dealt " + maxPlayerDamage + " damage!");
+                }
+
+                if (maxRoyalGuardDemonHealth > 0)
+                {
+                    Console.WriteLine("Enemy's Turn");
+                    Console.WriteLine("Player Health " + maxPlayerHealth + ". Enemy Health " + maxRoyalGuardDemonHealth + " .");
+
+                    maxPlayerHealth -= maxRoyalGuardDemonDamage;
+                    Console.WriteLine("Enemy dealt " + maxRoyalGuardDemonDamage + " damage");
+
+                    Console.Write("> ");
+
+                    Console.WriteLine("Press any key to continue.");
+                    Console.ReadKey(true);
+
+                    Console.Clear();
+                }
+            }
+
+            Console.WriteLine("You Win!");
+
+            Console.Write("> ");
+
+            Console.WriteLine("Press any key to continue.");
+            Console.ReadKey(true);
+
+            Console.Clear();
+
+            //Final Showdown! You vs. the Demon King!
+            Console.WriteLine("You come face to face with the Demon King. Time for the last fight!");
+
+            while (maxPlayerHealth > 0 && maxDemonKingHealth > 0)
+            {
+                Console.WriteLine("Player's Turn");
+                Console.WriteLine("Player Health " + maxPlayerHealth + ". Enemy Health " + maxDemonKingHealth + " .");
+                Console.WriteLine("1. Attack");
+
+                playerChoice = Console.ReadLine();
+
+                if (playerChoice == "1")
+                {
+                    maxDemonKingHealth -= maxPlayerDamage;
+                    Console.WriteLine("You dealt " + maxPlayerDamage + " damage!");
+                }
+
+                if (maxDemonKingHealth > 0)
+                {
+                    Console.WriteLine("Enemy's Turn");
+                    Console.WriteLine("Player Health " + maxPlayerHealth + ". Enemy Health " + maxDemonKingHealth + " .");
+
+                    maxPlayerHealth -= maxDemonKingDamage;
+                    Console.WriteLine("Enemy dealt " + maxDemonKingDamage + " damage");
+
+                    Console.Write("> ");
+
+                    Console.WriteLine("Press any key to continue.");
+                    Console.ReadKey(true);
+
+                    Console.Clear();
+                }
+            }
+
+            Console.WriteLine("You Win!");
+
+            Console.Write("> ");
+
+            Console.WriteLine("Press any key to continue.");
+            Console.ReadKey(true);
+
+            Console.Clear();
 
 
+            //The End.
+            Console.WriteLine("You beat the game! Congratulations!");
 
+            Console.Write("> ");
 
+            Console.WriteLine("Press any key to continue.");
+            Console.ReadKey(true);
 
-
-
-
-
+            Console.Clear();
 
             playerChoice = "";
 
